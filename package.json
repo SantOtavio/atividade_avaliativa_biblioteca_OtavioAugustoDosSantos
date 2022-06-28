@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "firebase": "^9.8.4",
+    "firebase-admin": "^11.0.0",
+    "nodemon": "^2.0.18"
+  },
+  "name": "atividade_avaliativa_biblioteca_otavioaugustodossantos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantOtavio/atividade_avaliativa_biblioteca_OtavioAugustoDosSantos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SantOtavio/atividade_avaliativa_biblioteca_OtavioAugustoDosSantos/issues"
+  },
+  "homepage": "https://github.com/SantOtavio/atividade_avaliativa_biblioteca_OtavioAugustoDosSantos#readme",
+  "devDependencies": {},
+  "description": ""
+}
