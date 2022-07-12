@@ -46,22 +46,8 @@ async function save(nomeTabela, id, dado) {
 }
 
 async function get(nomeTabela) {
-    const tableRef = collection(db, nomeTabela);
-
-    const q = query(tableRef);
-
-    const querySnapshot = await getDocs(q);
-
-    const lista = [];
-
-    querySnapshot.forEach((doc) => {
-        const data = {
-            ...doc.data(),
-            id: doc.id
-        }
-        lista.push(data);
-    });
-    return lista;
+    const data = await getDocs(collection(db, nomeTabela));
+    return data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 }
 
 async function getById(nomeTabela, id) {
