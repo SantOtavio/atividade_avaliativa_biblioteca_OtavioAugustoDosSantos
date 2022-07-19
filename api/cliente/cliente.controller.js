@@ -4,11 +4,11 @@ const router = express.Router();
 const clienteHandler = require("./cliente.handler");
 
 router.get("/", async (req, res) => {
-  res.json(await clienteHandler.buscarEditora());
+  res.json(await clienteHandler.buscarCliente());
 });
 
 router.get("/:id", async (req, res) => {
-  res.json(await clienteHandler.buscarEditoraId(req.params.id));
+  res.json(await clienteHandler.buscarClienteId(req.params.id));
 });
 
 router.post("/", async (req, res) => {

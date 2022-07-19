@@ -15,19 +15,17 @@ async function create(titulo, categoria, autores, statusLocacao, idLivro) {
       categoria,
       statusLocacao,
     });
-
-    return buscarLivroId(idLivro);
   } else {
-    await crud.save("livro", null, {
+    const livro = await crud.save("livro", null, {
       titulo,
       categoria,
       statusLocacao,
     });
 
     for (let i = 0; i < autores.length; i++) {
-      await crud.save("autorLivro", null, {
+      await crud.save("livroAutor", null, {
+        idLivro: livro.id,
         idAutor: autores[i],
-        idLivro: idLivro,
       });
     }
   }

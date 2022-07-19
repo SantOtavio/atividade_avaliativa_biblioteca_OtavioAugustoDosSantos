@@ -4,11 +4,11 @@ const router = express.Router();
 const locacaoLivroHandler = require("./locacaoLivro.handler");
 
 router.get("/", async (req, res) => {
-  res.json(await locacaoLivroHandler.buscarLocacao());
+  res.json(await locacaoLivroHandler.buscarLocacaoLivro());
 });
 
 router.get("/:id", async (req, res) => {
-  res.json(await locacaoLivroHandler.buscarLocacaoId(req.params.id));
+  res.json(await locacaoLivroHandler.buscarLocacaoLivroId(req.params.id));
 });
 
 router.post("/", async (req, res) => {

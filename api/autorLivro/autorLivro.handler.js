@@ -1,7 +1,7 @@
 const crud = require("../../crud");
 
 async function buscarAutorLivro() {
-  return await crud.get("autorLivro");
+  return await crud.get("livroAutor");
 }
 
 async function buscarAutorLivroId(id) {

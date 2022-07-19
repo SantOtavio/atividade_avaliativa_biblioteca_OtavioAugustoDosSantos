@@ -16,9 +16,9 @@ router.post("/", async (req, res) => {
   res.json(await autorHandler.create(nome, sobrenome));
 });
 
-router.post("/", async (req, res) => {
-  const { nome, sobrenome, idAutor } = req.body;
-  res.json(await autorHandler.create(nome, sobrenome, idAutor));
+router.put("/:id", async (req, res) => {
+  const { nome, sobrenome} = req.body;
+  res.json(await autorHandler.create(nome, sobrenome, req.params.id));
 });
 
 router.delete("/:id", async (req, res) => {

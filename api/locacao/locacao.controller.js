@@ -13,20 +13,20 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { idCliente, dataLocacao, dataDevolucao, livros } = req.body;
-  res.json(await locacaoHandler.create(idCliente, dataLocacao, dataDevolucao, livros));
+  res.json(await locacaoHandler.create(idCliente, dataLocacao, dataDevolucao, livros, null));
 });
 
-router.post("/", async (req, res) => {
-  const { idCliente, dataLocacao, dataDevolucao, idLocacao } = req.body;
-  res.json(
-    await locacaoHandler.create(
-      idCliente,
-      dataLocacao,
-      dataDevolucao,
-      idLocacao
-    )
-  );
-});
+// router.post("/", async (req, res) => {
+//   const { idCliente, dataLocacao, dataDevolucao, idLocacao } = req.body;
+//   res.json(
+//     await locacaoHandler.create(
+//       idCliente,
+//       dataLocacao,
+//       dataDevolucao,
+//       idLocacao
+//     )
+//   );
+// });
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;

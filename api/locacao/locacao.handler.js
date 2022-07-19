@@ -12,8 +12,8 @@ async function create(
   idCliente,
   dataLocacao,
   dataDevolucao,
-  idLocacao,
-  livros
+  livros,
+  idLocacao
 ) {
   if (idLocacao) {
     await crud.save("locacao", idLocacao, {
@@ -21,14 +21,27 @@ async function create(
       dataLocacao,
       dataDevolucao,
     });
-
-    return buscarLocacaoId(idLocacao);
   } else {
-    await crud.save("locacao", null, { idCliente, dataLocacao, dataDevolucao });
+    const locacoes = await crud.get("locacao");
+    const locacaoAtiva = locacoes.filter(
+      (locacao) => locacao.idCliente === idCliente
+    );
+    if (locacaoAtiva.length > 0) {
+      throw new Error("Cliente já possui uma locação ativa");
+    }
+
+    const locacaoLivrosArr = crud.get("locacaoLivros");
+    
+
+    const locacaoLivros = await crud.save("locacao", idLocacao, {
+      idCliente,
+      dataLocacao,
+      dataDevolucao,
+    });
 
     for (let i = 0; i < livros.length; i++) {
       await crud.save("locacaoLivro", null, {
-        idLocacao,
+        idLocacao: locacaoLivros.id,
         idLivro: livros[i],
       });
     }

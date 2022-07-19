@@ -12,21 +12,22 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { titulo, categoria, autores, statusLocacao } = req.body;
+  const { titulo, categoria, autores, statusLocacao, idEditora } = req.body;
   res.json(
-    await livroHandler.create(titulo, categoria, autores, statusLocacao)
+    await livroHandler.create(
+      titulo,
+      categoria,
+      autores,
+      statusLocacao,
+      idEditora
+    )
   );
 });
 
 router.post("/", async (req, res) => {
   const { titulo, categoria, statusLocacao, idLivro } = req.body;
   res.json(
-    await livroHandler.create(
-      titulo,
-      categoria,
-      statusLocacao,
-      idLivro
-    )
+    await livroHandler.create(titulo, categoria, statusLocacao, idLivro)
   );
 });
 
