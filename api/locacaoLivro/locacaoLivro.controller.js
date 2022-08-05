@@ -11,12 +11,7 @@ router.get("/:id", async (req, res) => {
   res.json(await locacaoLivroHandler.buscarLocacaoLivroId(req.params.id));
 });
 
-router.post("/", async (req, res) => {
-  const { idLocacao, idLivro } = req.body;
-  res.json(await locacaoLivroHandler.create(idLocacao, idLivro));
-});
-
-router.post("/", async (req, res) => {
+router.put("/", async (req, res) => {
   const { idLocacao, idLivro, idLocacaoLivro } = req.body;
   res.json(
     await locacaoLivroHandler.create(idLocacao, idLivro, idLocacaoLivro)

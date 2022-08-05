@@ -16,10 +16,12 @@ router.post("/", async (req, res) => {
   res.json(await clienteHandler.create(cpf, nome, email));
 });
 
-router.post("/", async (req, res) => {
-  const { cpf, nome, email, idCliente } = req.body;
+router.put("/", async (req, res) => {
+  const { idCliente, cpf, nome, email } = req.body;
   res.json(await clienteHandler.create(cpf, nome, email, idCliente));
-});
+}
+);
+
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;

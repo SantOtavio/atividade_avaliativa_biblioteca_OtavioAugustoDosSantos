@@ -1,4 +1,7 @@
+const { async } = require("@firebase/util");
 const crud = require("../../crud");
+const livroHandler = require("../livro/livro.handler");
+const locacaoLivroHandler = require("../locacaoLivro/locacaoLivro.handler");
 
 async function buscarLocacao() {
   return await crud.get("locacao");
@@ -23,35 +26,50 @@ async function create(
     });
   } else {
     const locacoes = await crud.get("locacao");
+
     const locacaoAtiva = locacoes.filter(
       (locacao) => locacao.idCliente === idCliente
     );
+
     if (locacaoAtiva.length > 0) {
       throw new Error("Cliente já possui uma locação ativa");
     }
 
-    const locacaoLivrosArr = crud.get("locacaoLivros");
-    
-
-    const locacaoLivros = await crud.save("locacao", idLocacao, {
+    const locacao = await crud.save("locacao", null, {
       idCliente,
       dataLocacao,
       dataDevolucao,
     });
 
-    for (let i = 0; i < livros.length; i++) {
-      await crud.save("locacaoLivro", null, {
-        idLocacao: locacaoLivros.id,
-        idLivro: livros[i],
-      });
-    }
+    console.log(locacao.idLocacao);
+
+    await locacaoLivro(livros, locacao.id);
+
   }
   return buscarLocacao();
 }
 
+
 async function deletar(id) {
   await crud.delete("locacao", id);
   return buscarLocacao();
+}
+
+async function locacaoLivro(livros, idLocacao) {
+  for (let i = 0; i < livros.length; i++) {
+    const livro = await livroHandler.buscarLivroId(livros[i]);
+    if (livro.statusLocacao == "nlocado") {
+      await crud.save("locacaoLivro", null, {
+        idLocacao: idLocacao,
+        idLivro: livros[i],
+      });
+      await crud.save("livro", livro.id, {
+        statusLocacao: "locado",
+      });
+    } else {
+      // throw new Error("Livro não está disponível");
+    }
+  }
 }
 
 module.exports = {

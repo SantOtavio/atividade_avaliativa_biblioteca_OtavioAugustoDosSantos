@@ -16,10 +16,11 @@ router.post("/", async (req, res) => {
   res.json(await editoraHandler.create(nome));
 });
 
-router.post("/", async (req, res) => {
-  const { nome, idEditora } = req.body;
+router.put("/", async (req, res) => {
+  const { idEditora, nome } = req.body;
   res.json(await editoraHandler.create(nome, idEditora));
-});
+}
+);
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;

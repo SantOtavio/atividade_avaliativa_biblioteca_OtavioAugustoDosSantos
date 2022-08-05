@@ -16,10 +16,11 @@ router.post("/", async (req, res) => {
   res.json(await autorLivroHandler.create(idAutor, idLivro));
 });
 
-router.post("/", async (req, res) => {
-  const { idAutor, idLivro, idAutorLivro } = req.body;
+router.put("/", async (req, res) => {
+  const { idAutorLivro, idAutor, idLivro } = req.body;
   res.json(await autorLivroHandler.create(idAutor, idLivro, idAutorLivro));
-});
+}
+);
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;

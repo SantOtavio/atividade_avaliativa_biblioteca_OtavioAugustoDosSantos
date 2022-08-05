@@ -36,6 +36,7 @@ async function save(nomeTabela, id, dado) {
         }
         return savedData;
     } else {
+        console.log(nomeTabela, dado);
         const referenceEntity = await addDoc(collection(db, nomeTabela), dado);
         const savedData = {
             ...dado,

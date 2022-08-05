@@ -24,12 +24,20 @@ router.post("/", async (req, res) => {
   );
 });
 
-router.post("/", async (req, res) => {
-  const { titulo, categoria, statusLocacao, idLivro } = req.body;
+router.put("/", async (req, res) => {
+  const { idLivro, titulo, categoria, autores, statusLocacao, idEditora } = req.body;
   res.json(
-    await livroHandler.create(titulo, categoria, statusLocacao, idLivro)
+    await livroHandler.create(
+      titulo,
+      categoria,
+      autores,
+      statusLocacao,
+      idEditora,
+      idLivro
+    )
   );
-});
+}
+);
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
