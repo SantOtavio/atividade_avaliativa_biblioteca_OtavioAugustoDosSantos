@@ -1,6 +1,7 @@
 const { async } = require("@firebase/util");
 const crud = require("../../crud");
 const livroHandler = require("../livro/livro.handler");
+const livroController = require("../livro/livro.controller");
 const locacaoLivroHandler = require("../locacaoLivro/locacaoLivro.handler");
 
 async function buscarLocacao() {
@@ -63,9 +64,11 @@ async function locacaoLivro(livros, idLocacao) {
         idLocacao: idLocacao,
         idLivro: livros[i],
       });
-      await crud.save("livro", livro.id, {
+      console.log(livros[i]);
+      livroController.put(livros[i], {
         statusLocacao: "locado",
       });
+      
     } else {
       // throw new Error("Livro não está disponível");
     }

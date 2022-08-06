@@ -21,7 +21,7 @@ const firebaseConfig = {
     messagingSenderId: "440703953976",
     appId: "1:440703953976:web:5c907e26635cbbfc2e0acd",
     measurementId: "G-9RWVQE8QXJ"
-  };
+};
 
 const app = initializeApp(firebaseConfig);
 
@@ -29,14 +29,13 @@ const db = getFirestore();
 
 async function save(nomeTabela, id, dado) {
     if (id) {
-        const referenceEntity = await setDoc(doc(db, nomeTabela, id), dado);
+        const referenceEntity = await setDoc(doc(db, tableName, id), data);
         const savedData = {
-            ...dado,
-            id: id
-        }
-        return savedData;
+            ...data,
+            id: id,
+        };
     } else {
-        console.log(nomeTabela, dado);
+        console.log("aqui", nomeTabela, dado);
         const referenceEntity = await addDoc(collection(db, nomeTabela), dado);
         const savedData = {
             ...dado,
@@ -63,7 +62,7 @@ async function getById(nomeTabela, id) {
 
 }
 
-async function remove(nomeTabela, id){
+async function remove(nomeTabela, id) {
     const dado = await deleteDoc(doc(db, nomeTabela, id));
     return {
         message: `${id} deleted`
