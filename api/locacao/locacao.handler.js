@@ -1,8 +1,5 @@
-const { async } = require("@firebase/util");
 const crud = require("../../crud");
 const livroHandler = require("../livro/livro.handler");
-const livroController = require("../livro/livro.controller");
-const locacaoLivroHandler = require("../locacaoLivro/locacaoLivro.handler");
 
 async function buscarLocacao() {
   return await crud.get("locacao");
@@ -27,7 +24,6 @@ async function create(
     });
   } else {
     const locacoes = await crud.get("locacao");
-
     const locacaoAtiva = locacoes.filter(
       (locacao) => locacao.idCliente === idCliente
     );
@@ -42,10 +38,9 @@ async function create(
       dataDevolucao,
     });
 
-    console.log(locacao.idLocacao);
+    console.log("amem");
 
     await locacaoLivro(livros, locacao.id);
-
   }
   return buscarLocacao();
 }
@@ -59,18 +54,20 @@ async function deletar(id) {
 async function locacaoLivro(livros, idLocacao) {
   for (let i = 0; i < livros.length; i++) {
     const livro = await livroHandler.buscarLivroId(livros[i]);
+    console.log("status", livro.statusLocacao);
     if (livro.statusLocacao == "nlocado") {
       await crud.save("locacaoLivro", null, {
         idLocacao: idLocacao,
         idLivro: livros[i],
       });
-      console.log(livros[i]);
-      livroController.put(livros[i], {
+
+      crud.save("livro", livros[i], {
+        titulo: livro.titulo,
+        categoria: livro.categoria,
         statusLocacao: "locado",
       });
-      
     } else {
-      // throw new Error("Livro não está disponível");
+      throw new Error("Livro não está disponível");
     }
   }
 }

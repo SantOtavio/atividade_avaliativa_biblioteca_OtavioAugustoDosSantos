@@ -14,7 +14,7 @@ async function deletar(id) {
   const locacaoLivro = await crud.getById("locacaoLivro", id);
   const livro = await crud.get("livro", locacaoLivro.idLivro);
   await crud.save("livro", locacaoLivro.idLivro, {
-    statusLocacao: "disponível",
+    statusLocacao: "nlocado",
   });
   await crud.delete("locacaoLivro", id);
   return buscarLocacaoLivro();
@@ -23,7 +23,7 @@ async function deletar(id) {
 async function locarLivro(arrLivros, idLocacao) {
   for (let i = 0; i < arrLivros.length; i++) {
     const livro = await crud.get("livro", arrLivros[i]);
-    if (livro.statusLocacao === "disponível") {
+    if (livro.statusLocacao === "nlocado") {
       await crud.save("locacaoLivro", null, {
         idLocacao,
         idLivro: arrLivros[i],

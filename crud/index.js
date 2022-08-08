@@ -28,19 +28,19 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
 async function save(nomeTabela, id, dado) {
-    if (id) {
-        const referenceEntity = await setDoc(doc(db, tableName, id), data);
+    if (id != null) {
+        const referenceEntity = await setDoc(doc(db, nomeTabela, id), dado);
         const savedData = {
-            ...data,
-            id: id,
+          ...dado,
+          id: id,
         };
+        return savedData;
     } else {
-        console.log("aqui", nomeTabela, dado);
         const referenceEntity = await addDoc(collection(db, nomeTabela), dado);
         const savedData = {
-            ...dado,
-            id: referenceEntity.id
-        }
+          ...dado,
+          id: referenceEntity.id,
+        };
         return savedData;
     }
 }

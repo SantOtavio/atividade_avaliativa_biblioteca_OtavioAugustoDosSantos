@@ -12,14 +12,17 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { titulo, categoria, autores, statusLocacao, idEditora } = req.body;
+  console.log("entrou1");
+  const { titulo, categoria, autores, statusLocacao, idEditora, idLivro } = req.body;
+  console.log("entrou2", idLivro);
   res.json(
     await livroHandler.create(
       titulo,
       categoria,
       autores,
       statusLocacao,
-      idEditora
+      idEditora,
+      null
     )
   );
 });
