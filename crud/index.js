@@ -13,7 +13,7 @@ const {
 } = require('firebase/firestore/lite');
 
 
-const firebaseConfig = {
+const configuracaoFirebase = {
     apiKey: "AIzaSyDuj64d_ol5uvqVvEwVNDPN9ihpBVedaaA",
     authDomain: "fir-santeca.firebaseapp.com",
     projectId: "fir-santeca",
@@ -23,11 +23,11 @@ const firebaseConfig = {
     measurementId: "G-9RWVQE8QXJ"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(configuracaoFirebase);
 
 const db = getFirestore();
 
-async function save(nomeTabela, id, dado) {
+async function salvar(nomeTabela, id, dado) {
     if (id != null) {
         const referenceEntity = await setDoc(doc(db, nomeTabela, id), dado);
         const savedData = {

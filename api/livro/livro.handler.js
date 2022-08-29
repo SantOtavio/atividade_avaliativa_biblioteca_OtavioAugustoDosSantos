@@ -13,7 +13,7 @@ async function create(titulo, categoria, autores, statusLocacao, idEditora, idLi
   console.log("entrou");
   if (idLivro != null) {
     console.log("entrou if errado");
-    await crud.save("livro", idLivro, {
+    await crud.salvar("livro", idLivro, {
       titulo,
       categoria,
       statusLocacao,
@@ -21,7 +21,7 @@ async function create(titulo, categoria, autores, statusLocacao, idEditora, idLi
     });
   } else if (idLivro == null) {
     console.log("entrou");
-    const livro = await crud.save("livro", null, {
+    const livro = await crud.salvar("livro", null, {
       titulo,
       categoria,
       statusLocacao,

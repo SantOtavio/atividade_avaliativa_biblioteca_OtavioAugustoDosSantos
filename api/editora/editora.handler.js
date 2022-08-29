@@ -10,9 +10,9 @@ async function buscarEditoraId(id) {
 
 async function create(nome, idEditora) {
   if (idEditora) {
-    await crud.save("editora", idEditora, { nome });
+    await crud.salvar("editora", idEditora, { nome });
   } else {
-    await crud.save("editora", null, { nome });
+    await crud.salvar("editora", null, { nome });
   }
   return buscarEditora();
 }

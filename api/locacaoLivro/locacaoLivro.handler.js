@@ -13,7 +13,7 @@ async function buscarLocacaoLivroId(id) {
 async function deletar(id) {
   const locacaoLivro = await crud.getById("locacaoLivro", id);
   const livro = await crud.get("livro", locacaoLivro.idLivro);
-  await crud.save("livro", locacaoLivro.idLivro, {
+  await crud.salvar("livro", locacaoLivro.idLivro, {
     statusLocacao: "nlocado",
   });
   await crud.delete("locacaoLivro", id);
@@ -24,11 +24,11 @@ async function locarLivro(arrLivros, idLocacao) {
   for (let i = 0; i < arrLivros.length; i++) {
     const livro = await crud.get("livro", arrLivros[i]);
     if (livro.statusLocacao === "nlocado") {
-      await crud.save("locacaoLivro", null, {
+      await crud.salvar("locacaoLivro", null, {
         idLocacao,
         idLivro: arrLivros[i],
       });
-      await crud.save("livro", arrLivros[i], {
+      await crud.salvar("livro", arrLivros[i], {
         statusLocacao: "locado",
       });
     } else {

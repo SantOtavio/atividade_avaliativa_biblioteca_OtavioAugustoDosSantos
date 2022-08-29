@@ -17,7 +17,7 @@ async function create(
   idLocacao
 ) {
   if (idLocacao) {
-    await crud.save("locacao", idLocacao, {
+    await crud.salvar("locacao", idLocacao, {
       idCliente,
       dataLocacao,
       dataDevolucao,
@@ -32,7 +32,7 @@ async function create(
       throw new Error("Cliente já possui uma locação ativa");
     }
 
-    const locacao = await crud.save("locacao", null, {
+    const locacao = await crud.salvar("locacao", null, {
       idCliente,
       dataLocacao,
       dataDevolucao,
@@ -56,12 +56,12 @@ async function locacaoLivro(livros, idLocacao) {
     const livro = await livroHandler.buscarLivroId(livros[i]);
     console.log("status", livro.statusLocacao);
     if (livro.statusLocacao == "nlocado") {
-      await crud.save("locacaoLivro", null, {
+      await crud.salvar("locacaoLivro", null, {
         idLocacao: idLocacao,
         idLivro: livros[i],
       });
 
-      crud.save("livro", livros[i], {
+      crud.salvar("livro", livros[i], {
         titulo: livro.titulo,
         categoria: livro.categoria,
         statusLocacao: "locado",

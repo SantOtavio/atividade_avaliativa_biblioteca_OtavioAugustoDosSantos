@@ -10,9 +10,9 @@ async function buscarAutorLivroId(id) {
 
 async function create(idAutor, idLivro, idAutorLivro) {
   if (idAutorLivro) {
-    await crud.save("autorLivro", idAutorLivro, { idAutor, idLivro });
+    await crud.salvar("autorLivro", idAutorLivro, { idAutor, idLivro });
   } else {
-    await crud.save("autorLivro", null, { idAutor, idLivro });
+    await crud.salvar("autorLivro", null, { idAutor, idLivro });
   }
   return buscarAutorLivro();
 }

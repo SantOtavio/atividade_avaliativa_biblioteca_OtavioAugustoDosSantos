@@ -10,9 +10,9 @@ async function buscarClienteId(id) {
 
 async function create(cpf, nome, email, idCliente) {
   if (idCliente) {
-    await crud.save("cliente", idCliente, { cpf, nome, email });
+    await crud.salvar("cliente", idCliente, { cpf, nome, email });
   } else {
-    await crud.save("cliente", null, { cpf, nome, email });
+    await crud.salvar("cliente", null, { cpf, nome, email });
   }
   return buscarCliente();
 }
